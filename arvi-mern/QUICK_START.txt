@@ -1,0 +1,185 @@
+================================================================================
+                        QUICK START GUIDE
+================================================================================
+
+GET UP AND RUNNING IN 5 MINUTES ⚡
+
+================================================================================
+PRE-REQUISITE: Node.js Installation
+================================================================================
+
+If you haven't installed Node.js yet:
+1. Download from: https://nodejs.org/
+2. Install the LTS version
+3. Restart your computer
+4. Verify: Open terminal and type "node --version"
+
+================================================================================
+STEP 1: OPEN TERMINAL IN PROJECT FOLDER
+================================================================================
+
+Option A (Windows):
+- Open File Explorer
+- Navigate to: C:\Users\Adhish Gautam\Documents\ARVI\arvi-mern
+- Right-click in empty space
+- Click "Open Terminal Here"
+
+Option B (Mac/Linux):
+- Open Terminal
+- Type: cd ~/Documents/ARVI/arvi-mern
+
+Option C (All Systems):
+- Open terminal/command prompt
+- Type: cd "C:\Users\Adhish Gautam\Documents\ARVI\arvi-mern"
+
+================================================================================
+STEP 2: INSTALL DEPENDENCIES (1-2 minutes)
+================================================================================
+
+Copy and paste this command:
+
+  npm install
+
+Wait for it to finish. You'll see "added XXX packages"
+
+================================================================================
+STEP 3: START THE SERVER
+================================================================================
+
+Copy and paste this command:
+
+  npm start
+
+The application will automatically open in your browser!
+
+If it doesn't, manually go to: http://localhost:3000
+
+================================================================================
+THAT'S IT! ✓
+================================================================================
+
+Your ARVI website is now running with:
+✓ All sections visible
+✓ Navigation working
+✓ Newsletter form functional
+✓ Responsive design
+✓ Contact links active
+
+================================================================================
+QUICK COMMANDS REFERENCE
+================================================================================
+
+Start development server:
+  npm start
+
+Build for production:
+  npm run build
+
+Run tests:
+  npm test
+
+Stop server:
+  Press Ctrl+C in terminal
+
+================================================================================
+WHAT TO TRY
+================================================================================
+
+1. Click navigation links at top - they scroll smoothly
+2. Scroll through all sections
+3. Try entering email in newsletter - you'll see a success message
+4. Resize browser window - watch it respond to different screen sizes
+5. Click "View Products" and "Join Waitlist" buttons
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+"npm: command not found"
+→ Node.js not installed. Download from https://nodejs.org/
+
+Port 3000 already in use?
+→ Stop other npm servers or use: PORT=3001 npm start
+
+Module errors?
+→ Delete node_modules folder, delete package-lock.json, run npm install again
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+After confirming everything works:
+
+1. Read: README.md (comprehensive overview)
+2. Read: LOGIC_EXPLANATION.txt (understand the code)
+3. Read: INSTALLATION_GUIDE.txt (detailed setup)
+4. Explore: src/components/ (view React components)
+5. Explore: src/styles/index.css (view styling)
+
+================================================================================
+DEPLOYMENT (When Ready)
+================================================================================
+
+One-Click Deploy to Vercel (easiest):
+1. Push code to GitHub
+2. Go to https://vercel.com/
+3. Click "Import Project"
+4. Select your GitHub repo
+5. Click "Deploy"
+
+================================================================================
+FILE LOCATIONS
+================================================================================
+
+React Components:  src/components/
+Styling:          src/styles/index.css
+Main App:         src/App.js
+Configuration:    package.json
+Documentation:    README.md, LOGIC_EXPLANATION.txt
+
+================================================================================
+USEFUL KEYBOARD SHORTCUTS
+================================================================================
+
+Ctrl+C       - Stop server in terminal
+Ctrl+S       - Save file in editor (auto-reloads)
+F12 or Ctrl+Shift+I  - Open browser developer tools
+Ctrl+/       - Toggle comment in code editor
+
+================================================================================
+FIRST 30 SECONDS CHECKLIST
+================================================================================
+
+☑ Node.js installed (check: node --version)
+☑ Terminal opened in project folder
+☑ npm install completed
+☑ npm start running
+☑ Browser showing http://localhost:3000
+☑ Website is visible with all sections
+
+================================================================================
+HELP RESOURCES
+================================================================================
+
+Documentation in this folder:
+- PROJECT_SUMMARY.txt  ← Complete overview
+- LOGIC_EXPLANATION.txt ← Code logic details
+- INSTALLATION_GUIDE.txt ← Detailed setup help
+- README.md ← Full documentation
+
+Online Resources:
+- React Docs: https://react.dev
+- Stack Overflow: Tag [reactjs]
+- Create React App: https://create-react-app.dev
+
+Contact:
+- Email: hello@arvibaby.com
+- Instagram: @arvibaby
+
+================================================================================
+                    YOU'RE READY TO GO! 🚀
+            Follow these 3 steps and you're live in 5 minutes:
+              1. npm install
+              2. npm start
+              3. http://localhost:3000
+================================================================================
