@@ -29,7 +29,6 @@ function App() {
                 <Benefits />
                 <Lifestyle />
                 <Materials />
-                <Colour />
                 <About />
                 <Newsletter />
                 <Contact />
