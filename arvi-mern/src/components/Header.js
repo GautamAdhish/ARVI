@@ -9,7 +9,7 @@ const Header = () => {
                     <Link to="/" className="logo">ARVI</Link>
                     <nav>
                         <Link to="/products">Shop</Link>
-                        <a href="#">Journal</a>
+                        <Link to="/products">Journal</Link>
                         <a href="#about">Our Story</a>
                         <a href="#contact">Contact</a>
                     </nav>
