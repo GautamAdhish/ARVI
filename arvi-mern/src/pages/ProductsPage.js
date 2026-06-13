@@ -1,24 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import plateCutlery from '../Images/plate_cutlery.png';
+import siliconBowl from '../Images/silicon_bowl.jpeg';
 
 const ProductsPage = () => {
     const products = [
         {
             id: 1,
-            name: 'Placeholder Product Name',
+            name: 'Silicone Bowl Set',
             subtitle: 'Soft starter set for everyday feeding',
-            description: 'A calm, simple starter product page while the final collection details are being prepared.'
+            description: 'Soft, stable bowls that stay put — great for toddlers learning to scoop.',
+            image: siliconBowl
         },
         {
             id: 2,
-            name: 'Placeholder Product Name',
+            name: 'Plate + Cutlery Set',
             subtitle: 'Easy-to-hold mealtime essentials',
-            description: 'This space is ready for the real product photos, names, and pricing when you are ready.'
-        },
-        {
-            id: 3,
-            name: 'Placeholder Product Name',
-            subtitle: 'Designed for little hands',
-            description: 'Keep this as a temporary product card until the final line-up is finalized.'
+            description: 'Stainless cutlery with a comfortable silicone grip — built to last and easy to hold.',
+            image: plateCutlery
         }
     ];
 
@@ -27,9 +26,9 @@ const ProductsPage = () => {
             <section className="products-page-hero">
                 <div className="container">
                     <p className="products-page-kicker">ARVI Collection</p>
-                    <h1>Products</h1>
+                    <h1>Shop the Range</h1>
                     <p className="products-page-intro">
-                        A simple placeholder page for the ARVI product collection. Replace the names and details whenever the final range is ready.
+                        Thoughtfully designed feeding essentials for your home.
                     </p>
                 </div>
             </section>
@@ -38,14 +37,21 @@ const ProductsPage = () => {
                 <div className="container">
                     <div className="products-page-grid">
                         {products.map((product) => (
-                            <article key={product.id} className="product-page-card">
-                                <div className="product-page-image">ARVI</div>
-                                <div className="product-page-content">
-                                    <p className="product-page-subtitle">{product.subtitle}</p>
-                                    <h2>{product.name}</h2>
-                                    <p>{product.description}</p>
-                                </div>
-                            </article>
+                            <Link to={`/products/${product.id}`} key={product.id} className="product-link-wrapper">
+                                <article className="product-page-card">
+                                    <div 
+                                        className="product-page-image"
+                                        style={{ backgroundImage: product.image ? `url('${product.image}')` : 'none' }}
+                                    >
+                                        {!product.image && 'ARVI'}
+                                    </div>
+                                    <div className="product-page-content">
+                                        <p className="product-page-subtitle">{product.subtitle}</p>
+                                        <h2>{product.name}</h2>
+                                        <p>{product.description}</p>
+                                    </div>
+                                </article>
+                            </Link>
                         ))}
                     </div>
                 </div>

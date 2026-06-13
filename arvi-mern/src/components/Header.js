@@ -25,6 +25,7 @@ const Header = () => {
                     </button>
                     <div className={`nav-backdrop ${menuOpen ? 'open' : ''}`} onClick={closeMenu} />
                     <nav id="primary-navigation" className={menuOpen ? 'open' : ''}>
+                        <Link to="/" onClick={closeMenu}>Home</Link>
                         <Link to="/products" onClick={closeMenu}>Shop</Link>
                         <Link to="/products" onClick={closeMenu}>Journal</Link>
                         <a href="#about" onClick={closeMenu}>Our Story</a>

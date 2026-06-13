@@ -12,6 +12,7 @@ import Newsletter from './components/Newsletter';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ProductsPage from './pages/ProductsPage';
+import ProductDetail from './pages/ProductDetail';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
             )}
           />
           <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
         </Routes>
       </div>
     </BrowserRouter>
