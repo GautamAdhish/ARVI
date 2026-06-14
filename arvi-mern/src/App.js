@@ -6,7 +6,6 @@ import Products from './components/Products';
 import Benefits from './components/Benefits';
 import Lifestyle from './components/Lifestyle';
 import Materials from './components/Materials';
-import Colour from './components/Colour';
 import About from './components/About';
 import Newsletter from './components/Newsletter';
 import Contact from './components/Contact';
