@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import plateCutlery from '../Images/plate_cutlery.png';
 import siliconBowl from '../Images/silicon_bowl.jpeg';
@@ -29,6 +29,21 @@ const ProductDetail = () => {
     ];
 
     const product = products.find(p => p.id === parseInt(id));
+
+    const [quantity, setQuantity] = useState(1);
+
+    const handleQuantityChange = (event) => {
+        const value = parseInt(event.target.value, 10) || 1;
+        setQuantity(Math.max(1, value));
+    };
+
+    const incrementQuantity = () => {
+        setQuantity(prev => prev + 1);
+    };
+
+    const decrementQuantity = () => {
+        setQuantity(prev => Math.max(1, prev - 1));
+    };
 
     if (!product) {
         return <div className="container"><h2>Product not found</h2><Link to="/products">Back to Shop</Link></div>;
@@ -68,9 +83,12 @@ const ProductDetail = () => {
                             <div className="purchase-actions">
                                 <div className="quantity-selector">
                                     <span>Qty</span>
-                                    <select>
-                                        {[1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n}</option>)}
-                                    </select>
+                                    <button onClick={decrementQuantity} className="quantity-btn minus">-</button>
+                                    <input type="number" 
+                                           value={quantity} 
+                                           onChange={handleQuantityChange} 
+                                           min="1" className="quantity-input" />
+                                    <button onClick={incrementQuantity} className="quantity-btn plus">+</button>
                                 </div>
                                 <button className="btn-primary add-to-cart">Add to Bag</button>
                             </div>
