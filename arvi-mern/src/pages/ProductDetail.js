@@ -12,6 +12,7 @@ const ProductDetail = () => {
             id: 1,
             name: 'Silicone Bowl Set',
             price: '£24.00',
+            stock: 99,
             subtitle: 'Soft starter set for everyday feeding',
             description: 'Our Silicone Bowl Set is designed to make the transition to solids easier for both parents and babies. The strong suction base ensures the bowl stays firmly on the table, reducing messes and spills.',
             features: ['100% Food-grade silicone', 'Strong suction base', 'Microwave and dishwasher safe', 'BPA and Phthalate free'],
@@ -21,9 +22,10 @@ const ProductDetail = () => {
             id: 2,
             name: 'Plate + Cutlery Set',
             price: '£32.00',
+            stock: 99,
             subtitle: 'Easy-to-hold mealtime essentials',
             description: 'A premium combination of high-quality stainless steel and soft silicone. This set is built to last through the toddler years and beyond, providing a comfortable grip for little hands developing motor skills.',
-            features: ['Premium stainless steel', 'Ergonomic silicone handles', 'Divided plate for portion control', 'Heat resistant'],
+            features: ['Premium stainless steel', 'Ergonomic silicone handles', 'Divided plate for portion control', 'Heat resistant'], 
             image: plateCutlery
         }
     ];
@@ -66,6 +68,7 @@ const ProductDetail = () => {
                             <p className="detail-subtitle">{product.subtitle}</p>
                             <h1 className="detail-title">{product.name}</h1>
                             <p className="detail-price">{product.price}</p>
+                            <p className="detail-stock">In Stock: {product.stock}</p>
                             
                             <div className="detail-description">
                                 <p>{product.description}</p>
