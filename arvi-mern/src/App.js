@@ -7,11 +7,11 @@ import Benefits from './components/Benefits';
 import Lifestyle from './components/Lifestyle';
 import Materials from './components/Materials';
 import About from './components/About';
-import Newsletter from './components/Newsletter';
 import Footer from './components/Footer';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetail from './pages/ProductDetail';
 import ContactPage from './pages/ContactPage';
+import JournalPage from './pages/JournalPage'; // Import the new JournalPage
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -30,13 +30,13 @@ function App() {
                 <Lifestyle />
                 <Materials />
                 <About /> {/* Keep About on the homepage if it's a section */}
-                <Newsletter />
                 <Footer />
               </>
             )}
           />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:id" element={<ProductDetail />} /> {/* Assuming ProductDetail is a page */}
+          <Route path="/journal" element={<JournalPage />} /> {/* New route for the JournalPage */}
           <Route path="/contact" element={<ContactPage />} /> {/* New route for the dedicated ContactPage */}
         </Routes>
       </div>
