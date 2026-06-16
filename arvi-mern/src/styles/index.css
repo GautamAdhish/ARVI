@@ -89,13 +89,27 @@ nav {
 }
 
 nav a {
-    text-decoration: none;
+    /* text-decoration: none; Removed to allow custom underline */
     color: #2c3e50;
     font-size: 16px;
     font-weight: 500;
     transition: color 0.3s ease;
     cursor: pointer;
+    position: relative; /* Needed for absolute positioning of ::after */
+    padding-bottom: 5px; /* Space for the underline */
 }
+
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0; /* Initial state: no underline */
+    height: 2px;
+    background-color: #7cb342; /* Accent color for underline */
+    transition: width 0.3s ease; /* Animation for width change */
+}
+
 
 nav a.logo {
     text-decoration: none;
@@ -103,6 +117,11 @@ nav a.logo {
 
 nav a:hover {
     color: #7cb342;
+}
+
+nav a:hover::after,
+nav a.active::after { /* Apply underline on hover and for active links */
+    width: 100%;
 }
 
 /* Hero Section */
@@ -906,7 +925,8 @@ button {
 }
 
 .form-group input, 
-.form-group textarea {
+.form-group textarea,
+.country-select {
     width: 100%;
     padding: 14px;
     border: 1px solid #e1e1e1;
@@ -917,10 +937,23 @@ button {
 }
 
 .form-group input:focus, 
-.form-group textarea:focus {
+.form-group textarea:focus,
+.country-select:focus {
     outline: none;
     border-color: #7cb342;
     box-shadow: 0 0 0 4px rgba(124, 179, 66, 0.1);
+}
+
+.phone-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.phone-input-group .country-select {
+    width: 140px;
+    flex-shrink: 0;
+    background-color: white;
+    cursor: pointer;
 }
 
 .btn-primary:disabled {
@@ -1012,6 +1045,11 @@ footer {
     nav a {
         font-size: 18px;
         width: 100%;
+        /* Reset desktop underline styles for mobile menu */
+        padding-bottom: 0;
+    }
+    nav a::after {
+        content: none;
         padding: 12px 0;
         border-bottom: 1px solid rgba(44, 62, 80, 0.08);
     }
@@ -1108,6 +1146,45 @@ footer {
         align-items: stretch;
         gap: 16px;
     }
+}
+
+/* Journal Page Styles */
+.journal-page-section {
+    padding: 80px 20px;
+    background-color: #fbf9f7;
+    min-height: 80vh;
+}
+
+.journal-title {
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.journal-intro {
+    font-size: 18px;
+    text-align: center;
+    color: #666;
+    margin-bottom: 60px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.journal-entry {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+}
+
+.journal-entry .entry-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
 /* Spacing utilities */
