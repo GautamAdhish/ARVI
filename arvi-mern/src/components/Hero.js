@@ -6,9 +6,7 @@ const Hero = () => {
     };
 
     const handleViewProducts = () => {
-        // smooth scroll to products section
-        const el = document.getElementById('products');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        window.open('/products', '_blank');
     };
 
     return (
