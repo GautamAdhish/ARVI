@@ -230,4 +230,4 @@ Contributions are welcome! Please follow the code style and create pull requests
 
 ---
 
-**Status**: Frontend Complete | Backend In Progress
+**Status**: Frontend Ongoing
