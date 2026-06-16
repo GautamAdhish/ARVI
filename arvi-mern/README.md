@@ -4,13 +4,13 @@ A modern React-based e-commerce website for ARVI baby feeding products. Built wi
 
 ## Features
 
-✅ **Responsive Design** - Mobile, tablet, and desktop friendly
-✅ **Component-Based Architecture** - Reusable React components
-✅ **Smooth Navigation** - Smooth scrolling navigation between sections
-✅ **Newsletter Signup** - Email subscription with form validation
-✅ **Product Showcase** - Dynamic product grid with images
-✅ **Benefits Section** - Display key features and benefits
-✅ **Contact Section** - Multiple contact channels (Email, Instagram, WhatsApp)
+✅ **Responsive Design** - Mobile, tablet, and desktop friendly</br>
+✅ **Component-Based Architecture** - Reusable React components</br>
+✅ **Smooth Navigation** - Smooth scrolling navigation between sections</br>
+✅ **Newsletter Signup** - Email subscription with form validation</br>
+✅ **Product Showcase** - Dynamic product grid with images</br>
+✅ **Benefits Section** - Display key features and benefits</br>
+✅ **Contact Section** - Multiple contact channels (Email, Instagram, WhatsApp)</br>
 ✅ **SEO Optimized** - Semantic HTML structure
 
 ## Tech Stack
@@ -106,7 +106,7 @@ Launches the test runner in interactive watch mode.
 
 ### Hero
 - Full-height hero section with background image
-- Call-to-action buttons
+- Call-to-action buttons, with "Browse the collection" opening the products page in a new tab.
 - Main headline and description
 
 ### Products
