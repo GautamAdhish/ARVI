@@ -47,6 +47,7 @@ nav {
     display: flex;
     gap: 30px;
     align-items: center;
+    text-decoration: none;
 }
 
 .menu-toggle {
@@ -89,7 +90,7 @@ nav {
 }
 
 nav a {
-    /* text-decoration: none; Removed to allow custom underline */
+    text-decoration: none; /* Removed to allow custom underline */
     color: #2c3e50;
     font-size: 16px;
     font-weight: 500;
@@ -1047,6 +1048,7 @@ footer {
         width: 100%;
         /* Reset desktop underline styles for mobile menu */
         padding-bottom: 0;
+        text-decoration: none;
     }
     nav a::after {
         content: none;
