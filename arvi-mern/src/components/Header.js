@@ -29,7 +29,7 @@ const Header = () => {
                         <Link to="/products" onClick={closeMenu}>Shop</Link>
                         <Link to="/products" onClick={closeMenu}>Journal</Link>
                         <a href="#about" onClick={closeMenu}>Our Story</a>
-                        <a href="#contact" onClick={closeMenu}>Contact</a>
+                        <Link to="/contact" onClick={closeMenu}>Contact</Link> {/* Updated to use Link for the dedicated ContactPage */}
                     </nav>
                 </div>
             </div>

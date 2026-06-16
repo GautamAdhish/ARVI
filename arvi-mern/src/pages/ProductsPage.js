@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import plateCutlery from '../Images/plate_cutlery.png';
 import siliconBowl from '../Images/silicon_bowl.jpeg';
 import Footer from '../components/Footer';
-
 const ProductsPage = () => {
     const products = [
         {

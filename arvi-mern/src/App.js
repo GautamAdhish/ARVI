@@ -8,10 +8,10 @@ import Lifestyle from './components/Lifestyle';
 import Materials from './components/Materials';
 import About from './components/About';
 import Newsletter from './components/Newsletter';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetail from './pages/ProductDetail';
+import ContactPage from './pages/ContactPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -29,15 +29,15 @@ function App() {
                 <Benefits />
                 <Lifestyle />
                 <Materials />
-                <About />
+                <About /> {/* Keep About on the homepage if it's a section */}
                 <Newsletter />
-                <Contact />
                 <Footer />
               </>
             )}
           />
           <Route path="/products" element={<ProductsPage />} />
-          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/products/:id" element={<ProductDetail />} /> {/* Assuming ProductDetail is a page */}
+          <Route path="/contact" element={<ContactPage />} /> {/* New route for the dedicated ContactPage */}
         </Routes>
       </div>
     </BrowserRouter>
