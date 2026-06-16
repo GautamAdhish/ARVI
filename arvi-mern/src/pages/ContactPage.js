@@ -57,21 +57,6 @@ const ContactPage = () => {
                     </header>
                     
                     <div className="contact-layout">
-                        <aside className="contact-info">
-                            <div className="method-item">
-                                <strong>Email</strong>
-                                <a href="mailto:hello@arvibaby.com">hello@arvibaby.com</a>
-                            </div>
-                            <div className="method-item">
-                                <strong>Instagram</strong>
-                                <a href="https://instagram.com/arvibaby" target="_blank" rel="noopener noreferrer">@arvibaby</a>
-                            </div>
-                            <div className="method-item">
-                                <strong>WhatsApp</strong>
-                                <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">Message us</a>
-                            </div>
-                        </aside>
-
                         <form className="contact-form" onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="name">Name</label>
@@ -95,6 +80,21 @@ const ContactPage = () => {
                             {submissionStatus === 'success' && <p className="success-message">Your message has been sent successfully!</p>}
                             {submissionStatus === 'error' && <p className="error-message">There was an error sending your message. Please try again.</p>}
                         </form>
+
+                        <aside className="contact-info">
+                            <div className="method-item">
+                                <strong>Email</strong>
+                                <a href="mailto:hello@arvibaby.com">hello@arvibaby.com</a>
+                            </div>
+                            <div className="method-item">
+                                <strong>Instagram</strong>
+                                <a href="https://instagram.com/arvibaby" target="_blank" rel="noopener noreferrer">@arvibaby</a>
+                            </div>
+                            <div className="method-item">
+                                <strong>WhatsApp</strong>
+                                <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">Message us</a>
+                            </div>
+                        </aside>
                     </div>
                 </div>
             </section>
