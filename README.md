@@ -221,7 +221,7 @@ Contributions are welcome! Please follow the code style and create pull requests
 
 ## Changelog
 
-### v1.0.0
+### v1.0.20
 - Initial React migration from static HTML
 - All components implemented
 - Responsive design complete
