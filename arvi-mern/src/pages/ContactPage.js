@@ -5,6 +5,8 @@ const ContactPage = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
+        countryCode: '+44',
+        phone: '',
         subject: '',
         message: ''
     });
@@ -24,7 +26,7 @@ const ContactPage = () => {
         setSubmissionStatus(null); // Reset status on new submission attempt
 
         // Basic validation
-        if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+        if (!formData.name || !formData.email || !formData.phone || !formData.subject || !formData.message) {
             setSubmissionStatus('error');
             return;
         }
@@ -38,7 +40,7 @@ const ContactPage = () => {
             // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 1000));
             setSubmissionStatus('success');
-            setFormData({ name: '', email: '', subject: '', message: '' }); // Clear form
+            setFormData({ name: '', email: '', countryCode: '+44', phone: '', subject: '', message: '' }); // Clear form
         } catch (error) {
             console.error('Submission error:', error);
             setSubmissionStatus('error');
@@ -65,6 +67,26 @@ const ContactPage = () => {
                             <div className="form-group">
                                 <label htmlFor="email">Email</label>
                                 <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="your@email.com" required />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="phone">Phone Number</label>
+                                <div className="phone-input-group">
+                                    <select 
+                                        name="countryCode" 
+                                        value={formData.countryCode} 
+                                        onChange={handleChange} 
+                                        className="country-select"
+                                        aria-label="Country code"
+                                    >
+                                        <option value="+44">UK (+44)</option>
+                                        <option value="+1">US (+1)</option>
+                                        <option value="+61">AU (+61)</option>
+                                        <option value="+91">IN (+91)</option>
+                                        <option value="+33">FR (+33)</option>
+                                        <option value="+49">DE (+49)</option>
+                                    </select>
+                                    <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="7123 456789" required />
+                                </div>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="subject">Subject</label>
