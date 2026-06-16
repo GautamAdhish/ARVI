@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -25,11 +25,11 @@ const Header = () => {
                     </button>
                     <div className={`nav-backdrop ${menuOpen ? 'open' : ''}`} onClick={closeMenu} />
                     <nav id="primary-navigation" className={menuOpen ? 'open' : ''}>
-                        <Link to="/" onClick={closeMenu}>Home</Link>
-                        <Link to="/products" onClick={closeMenu}>Shop</Link>
-                        <Link to="/products" onClick={closeMenu}>Journal</Link>
+                        <NavLink to="/" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Home</NavLink>
+                        <NavLink to="/products" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Shop</NavLink>
+                        <NavLink to="/journal" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Journal</NavLink>
                         <a href="#about" onClick={closeMenu}>Our Story</a>
-                        <Link to="/contact" onClick={closeMenu}>Contact</Link> {/* Updated to use Link for the dedicated ContactPage */}
+                        <NavLink to="/contact" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Contact</NavLink>
                     </nav>
                 </div>
             </div>
