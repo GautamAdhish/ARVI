@@ -27,7 +27,8 @@ const Header = () => {
                     <nav id="primary-navigation" className={menuOpen ? 'open' : ''}>
                         <NavLink to="/" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Home</NavLink>
                         <NavLink to="/products" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Shop</NavLink>
-                        <a href="#about" onClick={closeMenu}>Our Story</a>
+                        <NavLink to="/cart" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Cart</NavLink>
+                        <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Our Story</NavLink>
                         {/* <NavLink to="/journal" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Journal</NavLink> */}
                         <NavLink to="/contact" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Contact</NavLink>
                     </nav>
