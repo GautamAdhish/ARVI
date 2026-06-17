@@ -11,7 +11,7 @@ import Footer from './components/Footer';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetail from './pages/ProductDetail';
 import ContactPage from './pages/ContactPage';
-import JournalPage from './pages/JournalPage'; // Import the new JournalPage
+// import JournalPage from './pages/JournalPage'; // Import the new JournalPage
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -35,8 +35,8 @@ function App() {
             )}
           />
           <Route path="/products" element={<ProductsPage />} />
-          <Route path="/products/:id" element={<ProductDetail />} /> {/* Assuming ProductDetail is a page */}
-          <Route path="/journal" element={<JournalPage />} /> {/* New route for the JournalPage */}
+          <Route path="/products/:id" element={<ProductDetail />} />
+          {/* <Route path="/journal" element={<JournalPage />} /> */}
           <Route path="/contact" element={<ContactPage />} /> {/* New route for the dedicated ContactPage */}
         </Routes>
       </div>
