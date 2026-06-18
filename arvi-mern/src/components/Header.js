@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ cartCount }) => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const closeMenu = () => setMenuOpen(false);
@@ -27,7 +27,12 @@ const Header = () => {
                     <nav id="primary-navigation" className={menuOpen ? 'open' : ''}>
                         <NavLink to="/" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Home</NavLink>
                         <NavLink to="/products" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Shop</NavLink>
-                        <NavLink to="/cart" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Cart</NavLink>
+                        <NavLink to="/cart" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>
+                            Cart
+                            {cartCount > 0 && (
+                                <span style={{ marginLeft: '6px', background: '#7cb342', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px' }}>{cartCount}</span>
+                            )}
+                        </NavLink>
                         <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Our Story</NavLink>
                         {/* <NavLink to="/journal" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Journal</NavLink> */}
                         <NavLink to="/contact" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Contact</NavLink>
