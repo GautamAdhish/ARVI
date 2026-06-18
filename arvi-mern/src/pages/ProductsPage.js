@@ -1,26 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import plateCutlery from '../Images/plate_cutlery.png';
-import siliconBowl from '../Images/silicon_bowl.jpeg';
 import Footer from '../components/Footer';
-const ProductsPage = () => {
-    const products = [
-        {
-            id: 1,
-            name: 'Silicone Bowl Set',
-            subtitle: 'Soft starter set for everyday feeding',
-            description: 'Soft, stable bowls that stay put, great for toddlers learning to scoop.',
-            image: siliconBowl
-        },
-        {
-            id: 2,
-            name: 'Plate + Cutlery Set',
-            subtitle: 'Easy-to-hold mealtime essentials',
-            description: 'Stainless cutlery with a comfortable silicone grip, built to last and easy to hold.',
-            image: plateCutlery
-        }
-    ];
 
+const ProductsPage = ({ products }) => {
     return (
         <>
             <main className="products-page">
@@ -50,6 +32,8 @@ const ProductsPage = () => {
                                             <p className="product-page-subtitle">{product.subtitle}</p>
                                             <h2>{product.name}</h2>
                                             <p>{product.description}</p>
+                                            <p className="product-page-price" style={{ marginTop: '12px', fontWeight: '600', color: '#2f4a4d' }}>${product.price.toFixed(2)}</p>
+                                            <p className="product-page-stock" style={{ fontSize: '12px', color: '#7a8b87' }}>{product.stock} in stock</p>
                                         </div>
                                     </article>
                                 </Link>
