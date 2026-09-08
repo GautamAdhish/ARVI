@@ -1,9 +1,21 @@
 import React from 'react';
 import Footer from '../components/Footer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
-const CartPage = ({ cart, removeFromCart }) => {
-    const total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+const CartPage = () => {
+    const { cart, total, cartCount, updateQuantity, removeFromCart, clearCart, loading } = useCart();
+    const navigate = useNavigate();
+
+    const handleQuantityChange = async (itemId, newQty) => {
+        if (newQty < 1) return;
+        await updateQuantity(itemId, newQty);
+    };
+
+    const subtotal = total;
+    const shipping = subtotal > 50 ? 0 : 5.99;
+    const tax = subtotal * 0.08;
+    const finalTotal = subtotal + shipping + tax;
 
     return (
         <>
@@ -11,48 +23,97 @@ const CartPage = ({ cart, removeFromCart }) => {
                 <div className="container">
                     <header className="cart-header">
                         <h1>Your Bag</h1>
-                        <p>Items you've added to your collection.</p>
+                        <p>{cartCount === 0 ? 'Your bag is empty' : `${cartCount} ${cartCount === 1 ? 'item' : 'items'} in your collection`}</p>
                     </header>
                     
-                    <div className="cart-content">
-                        {cart.length === 0 ? (
-                            <>
-                                <p>Your bag is currently empty.</p>
-                                <Link to="/products" className="btn-primary" style={{ display: 'inline-block', marginTop: '20px', textDecoration: 'none', borderRadius: '4px' }}>
+                    <div className="cart-layout">
+                        {cart.items.length === 0 ? (
+                            <div className="cart-content empty">
+                                <div className="empty-icon">🛒</div>
+                                <h3>Your bag is currently empty.</h3>
+                                <p>Looks like you haven't added anything yet. Let's find something your little one will love.</p>
+                                <Link to="/products" className="btn-primary" style={{ display: 'inline-block', marginTop: '20px', textDecoration: 'none', borderRadius: '50px' }}>
                                     Continue Shopping
                                 </Link>
-                            </>
-                        ) : (
-                            <div className="cart-items">
-                                {cart.map(item => (
-                                    <div key={item.id} className="cart-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 0', borderBottom: '1px solid #eee' }}>
-                                        <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-                                            <img src={item.image} alt={item.name} style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '8px' }} />
-                                            <div style={{ textAlign: 'left' }}>
-                                                <h3 style={{ fontSize: '16px' }}>{item.name}</h3>
-                                                <p style={{ fontSize: '14px', color: '#666' }}>Qty: {item.quantity} × ${item.price.toFixed(2)}</p>
-                                            </div>
-                                        </div>
-                                        <button 
-                                            onClick={() => removeFromCart(item.id)}
-                                            style={{ background: 'none', border: 'none', color: '#e74c3c', cursor: 'pointer', fontWeight: '600' }}
-                                        >
-                                            Remove
-                                        </button>
-                                    </div>
-                                ))}
-                                <div className="cart-summary" style={{ marginTop: '30px', textAlign: 'right' }}>
-                                    <p style={{ fontSize: '18px', fontWeight: '600', marginBottom: '20px' }}>
-                                        Total: ${total.toFixed(2)}
-                                    </p>
-                                    <button className="btn-primary" style={{ width: '100%', borderRadius: '50px' }}>
-                                        Checkout
-                                    </button>
-                                    <Link to="/products" style={{ display: 'block', marginTop: '15px', color: '#7a8b87', fontSize: '14px' }}>
-                                        Add more items
-                                    </Link>
-                                </div>
                             </div>
+                        ) : (
+                            <>
+                                <div className="cart-items-panel">
+                                    {cart.items.map(item => {
+                                        const prod = item.product || {};
+                                        const itemId = item._id;
+                                        const prodImage = prod.image || prod.images?.[0] || item.image || '';
+                                        const prodName = prod.name || item.name || 'Product';
+                                        const price = item.price;
+
+                                        return (
+                                            <div key={itemId} className="cart-item">
+                                                <div className="cart-item-image">
+                                                    <img src={prodImage} alt={prodName} />
+                                                </div>
+                                                <div className="cart-item-details">
+                                                    <h3>{prodName}</h3>
+                                                    <p className="cart-item-subtitle">{prod.subtitle || ''}</p>
+                                                    <p className="cart-item-price">${price.toFixed(2)} each</p>
+                                                    
+                                                    <div className="cart-item-actions">
+                                                        <div className="qty-controls">
+                                                            <button onClick={() => handleQuantityChange(itemId, item.quantity - 1)} disabled={item.quantity <= 1 || loading}>-</button>
+                                                            <span>{item.quantity}</span>
+                                                            <button onClick={() => handleQuantityChange(itemId, item.quantity + 1)} disabled={loading}>+</button>
+                                                        </div>
+                                                        <button onClick={() => removeFromCart(itemId)} className="remove-btn" disabled={loading}>
+                                                            Remove
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div className="cart-item-total">
+                                                    ${(price * item.quantity).toFixed(2)}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+
+                                    <div className="cart-bottom-actions">
+                                        <button onClick={() => clearCart()} className="btn-text">Clear Cart</button>
+                                        <Link to="/products">← Continue Shopping</Link>
+                                    </div>
+                                </div>
+
+                                <div className="cart-summary-panel">
+                                    <h3>Order Summary</h3>
+                                    <div className="summary-row">
+                                        <span>Subtotal ({cartCount} items)</span>
+                                        <span>${subtotal.toFixed(2)}</span>
+                                    </div>
+                                    <div className="summary-row">
+                                        <span>Shipping</span>
+                                        <span>{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
+                                    </div>
+                                    <div className="summary-row">
+                                        <span>Tax</span>
+                                        <span>${tax.toFixed(2)}</span>
+                                    </div>
+                                    {subtotal > 0 && subtotal < 50 && (
+                                        <div className="free-shipping-notice">
+                                            Add ${(50 - subtotal).toFixed(2)} more for FREE shipping! 🚚
+                                        </div>
+                                    )}
+                                    <div className="summary-row total">
+                                        <span>Total</span>
+                                        <span>${finalTotal.toFixed(2)}</span>
+                                    </div>
+
+                                    <button onClick={() => navigate('/checkout')} className="btn-primary checkout-btn">
+                                        Proceed to Checkout
+                                    </button>
+
+                                    <div className="payment-icons">
+                                        <span>🔒 Secure checkout</span>
+                                        <span>💳 Card • UPI • COD</span>
+                                    </div>
+                                </div>
+                            </>
                         )}
                     </div>
                 </div>

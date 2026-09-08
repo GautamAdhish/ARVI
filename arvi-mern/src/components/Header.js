@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 
-const Header = ({ cartCount }) => {
+const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const { user, isAuthenticated, isAdmin, logout } = useAuth();
+    const { cartCount } = useCart();
+    const navigate = useNavigate();
 
     const closeMenu = () => setMenuOpen(false);
+
+    const handleLogout = () => {
+        logout();
+        closeMenu();
+        navigate('/');
+    };
 
     return (
         <header>
@@ -30,12 +41,27 @@ const Header = ({ cartCount }) => {
                         <NavLink to="/cart" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>
                             Cart
                             {cartCount > 0 && (
-                                <span style={{ marginLeft: '6px', background: '#7cb342', color: 'white', padding: '2px 8px', borderRadius: '10px', fontSize: '12px' }}>{cartCount}</span>
+                                <span className="cart-badge">{cartCount}</span>
                             )}
                         </NavLink>
                         <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Our Story</NavLink>
-                        {/* <NavLink to="/journal" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Journal</NavLink> */}
                         <NavLink to="/contact" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Contact</NavLink>
+                        
+                        {isAuthenticated ? (
+                            <>
+                                <NavLink to="/orders" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Orders</NavLink>
+                                {isAdmin && <NavLink to="/admin" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Admin</NavLink>}
+                                <div className="user-menu">
+                                    <span className="user-name">Hi, {user?.name?.split(' ')[0]}</span>
+                                    <button onClick={handleLogout} className="btn-logout">Logout</button>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <NavLink to="/login" className={({ isActive }) => isActive ? 'active' : undefined} onClick={closeMenu}>Login</NavLink>
+                                <Link to="/register" className="btn-register" onClick={closeMenu}>Sign Up</Link>
+                            </>
+                        )}
                     </nav>
                 </div>
             </div>
