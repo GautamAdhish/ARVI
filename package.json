@@ -1,21 +1,30 @@
 {
-  "name": "arvi",
-  "version": "1.0.0",
-  "description": "��#\u0000 \u0000A\u0000R\u0000V\u0000I\u0000\r\u0000 \u0000",
-  "main": "index.js",
+  "name": "arvi-fullstack",
+  "version": "2.0.0",
+  "description": "ARVI - Modern Feeding Collection - Full Stack MERN E-commerce",
+  "main": "server/src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/src/index.js",
+    "server": "cd server && npm run dev",
+    "client": "cd arvi-mern && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-all": "npm install && cd server && npm install && cd ../arvi-mern && npm install",
+    "seed": "cd server && npm run seed",
+    "build": "cd arvi-mern && npm run build",
+    "test": "echo \"No tests yet\" && exit 0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GautamAdhish/ARVI.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["mern", "ecommerce", "baby-products", "arvi", "fullstack"],
+  "author": "ARVI Team",
   "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/GautamAdhish/ARVI/issues"
+  "devDependencies": {
+    "concurrently": "^8.2.0"
   },
-  "homepage": "https://github.com/GautamAdhish/ARVI#readme"
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
 }

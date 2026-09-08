@@ -1,109 +1,51 @@
 import React, { useState } from 'react';
 import Footer from '../components/Footer';
+import { contactAPI } from '../services/api';
 
 const ContactPage = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        countryCode: '+44',
         phone: '',
-        subject: '',
+        countryCode: '+91',
+        subject: 'General Inquiry',
         message: ''
     });
-    const [submissionStatus, setSubmissionStatus] = useState(null); // 'success', 'error', or null
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [status, setStatus] = useState({ type: '', message: '' });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value
-        }));
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmissionStatus(null); // Reset status on new submission attempt
-
-        // Basic validation
-        if (!formData.name || !formData.email || !formData.phone || !formData.subject || !formData.message) {
-            setSubmissionStatus('error');
-            return;
-        }
-
-        // In a real application, you would send this data to a backend server.
-        // For this example, we'll just simulate a successful submission.
-        console.log('Form submitted:', formData);
-        setIsSubmitting(true);
+        setLoading(true);
+        setStatus({ type: '', message: '' });
 
         try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            setSubmissionStatus('success');
-            setFormData({ name: '', email: '', countryCode: '+44', phone: '', subject: '', message: '' }); // Clear form
+            const response = await contactAPI.send(formData);
+            setStatus({ type: 'success', message: response.data.message || 'Message sent successfully! We will reply within 24 hours.' });
+            setFormData({ name: '', email: '', phone: '', countryCode: '+91', subject: 'General Inquiry', message: '' });
         } catch (error) {
-            console.error('Submission error:', error);
-            setSubmissionStatus('error');
+            const message = error.response?.data?.message || 'Failed to send message. Please try emailing us directly.';
+            setStatus({ type: 'error', message });
         } finally {
-            setIsSubmitting(false);
+            setLoading(false);
         }
     };
 
     return (
         <>
-            <section className="contact-page-section">
+            <main className="contact-page-section">
                 <div className="container">
                     <header className="contact-header">
-                        <h1>Get in touch</h1>
-                        <p>Have a question or just want to say hello? We'd love to hear from you.</p>
+                        <h1>Get in Touch</h1>
+                        <p>Have a question about our products? Want to collaborate? We'd love to hear from you. Our team replies within 24 hours.</p>
                     </header>
-                    
-                    <div className="contact-layout">
-                        <form className="contact-form" onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="name">Name</label>
-                                <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Your name" required />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="email">Email</label>
-                                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="your@email.com" required />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="phone">Phone Number</label>
-                                <div className="phone-input-group">
-                                    <select 
-                                        name="countryCode" 
-                                        value={formData.countryCode} 
-                                        onChange={handleChange} 
-                                        className="country-select"
-                                        aria-label="Country code"
-                                    >
-                                        <option value="+44">UK (+44)</option>
-                                        <option value="+1">US (+1)</option>
-                                        <option value="+61">AU (+61)</option>
-                                        <option value="+91">IN (+91)</option>
-                                        <option value="+33">FR (+33)</option>
-                                        <option value="+49">DE (+49)</option>
-                                    </select>
-                                    <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="7123 456789" required />
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" value={formData.subject} onChange={handleChange} placeholder="How can we help?" required />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="message">Message</label>
-                                <textarea id="message" name="message" rows="5" value={formData.message} onChange={handleChange} placeholder="Tell us more..." required></textarea>
-                            </div>
-                            <button type="submit" className="btn-primary" disabled={isSubmitting}>
-                                {isSubmitting ? 'Sending...' : 'Send Message'}
-                            </button>
-                            {submissionStatus === 'success' && <p className="success-message">Your message has been sent successfully!</p>}
-                            {submissionStatus === 'error' && <p className="error-message">There was an error sending your message. Please try again.</p>}
-                        </form>
 
-                        <aside className="contact-info">
+                    <div className="contact-layout">
+                        <div className="contact-info">
                             <div className="method-item">
                                 <strong>Email</strong>
                                 <a href="mailto:hello@arvibaby.com">hello@arvibaby.com</a>
@@ -113,13 +55,67 @@ const ContactPage = () => {
                                 <a href="https://instagram.com/arvibaby" target="_blank" rel="noopener noreferrer">@arvibaby</a>
                             </div>
                             <div className="method-item">
-                                <strong>WhatsApp</strong>
-                                <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">Message us</a>
+                                <strong>Support Hours</strong>
+                                <a>Mon-Fri, 9AM - 6PM IST</a>
                             </div>
-                        </aside>
+                        </div>
+
+                        <form className="contact-form" onSubmit={handleSubmit}>
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <label>Name *</label>
+                                    <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Your full name" />
+                                </div>
+                                <div className="form-group">
+                                    <label>Email *</label>
+                                    <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="you@example.com" />
+                                </div>
+                            </div>
+
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <label>Phone</label>
+                                    <div className="phone-input-group">
+                                        <select name="countryCode" value={formData.countryCode} onChange={handleChange} className="country-select">
+                                            <option value="+91">🇮🇳 +91</option>
+                                            <option value="+1">🇺🇸 +1</option>
+                                            <option value="+44">🇬🇧 +44</option>
+                                            <option value="+61">🇦🇺 +61</option>
+                                            <option value="+971">🇦🇪 +971</option>
+                                        </select>
+                                        <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="98765 43210" />
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label>Subject</label>
+                                    <select name="subject" value={formData.subject} onChange={handleChange}>
+                                        <option value="General Inquiry">General Inquiry</option>
+                                        <option value="Order Support">Order Support</option>
+                                        <option value="Product Question">Product Question</option>
+                                        <option value="Collaboration">Collaboration</option>
+                                        <option value="Wholesale">Wholesale</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="form-group">
+                                <label>Message *</label>
+                                <textarea name="message" value={formData.message} onChange={handleChange} required rows="5" placeholder="Tell us how we can help you..."></textarea>
+                            </div>
+
+                            <button type="submit" className="btn-primary full-width" disabled={loading}>
+                                {loading ? 'Sending...' : 'Send Message'}
+                            </button>
+
+                            {status.message && (
+                                <div className={status.type === 'success' ? 'success-message' : 'error-message'}>
+                                    {status.message}
+                                </div>
+                            )}
+                        </form>
                     </div>
                 </div>
-            </section>
+            </main>
             <Footer />
         </>
     );
